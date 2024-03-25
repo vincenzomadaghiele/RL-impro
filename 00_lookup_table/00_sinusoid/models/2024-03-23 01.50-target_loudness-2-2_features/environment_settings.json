@@ -1,0 +1,25 @@
+{
+    "instrument_name": "00_sinusoid",
+    "corpus_name": "corpus_guitar_train",
+    "N_synth_params": 2,
+    "features_keep": [
+        "loudness-2",
+        "spectral-0"
+    ],
+    "lookup_table_path": "00_lookup_table/00_sinusoid/features/00_sinusoid_loudness_mfcc_spectral_lookup_table_filtered.csv",
+    "target_corpus_path": "01_target_corpus/corpus_guitar_train/all_features",
+    "reward_weights": [
+        1,
+        1,
+        0.1
+    ],
+    "training_mode": "mixed_random+corpus_full_episode",
+    "reward_type": "cubic+prize",
+    "step_size": 0.05,
+    "ip_send": "127.0.0.1",
+    "port_send": 6667,
+    "port_send_optimal": 6668,
+    "verbose": "False",
+    "live": "True",
+    "max_episode_duration": 3000
+}
