@@ -122,6 +122,12 @@ if __name__ == '__main__':
 						help='number of parameters of the synth')
 	parser.add_argument('--SUBDIV', type=int, default=10,
 						help='granularity of the lookup table')
+	parser.add_argument('--THREADS', type=int, default=5,
+						help='number of parallel threads for computation')
+	parser.add_argument('--WINDOW_SIZE', type=int, default=1024,
+						help='size of FFT window for feature computation')
+	parser.add_argument('--WINDOW_OVERLAP', type=int, default=512,
+						help='overlap of FFT windows for feature computation')
 	parser.add_argument('--UBUNTU', type=bool, default=False,
 						help='True if the script runs on Ubuntu')
 	args = parser.parse_args(sys.argv[1:])
@@ -134,6 +140,9 @@ if __name__ == '__main__':
 	synth_name = args.SYNTH_NAME
 	N_PARAMS = args.N_PARAMS
 	SUBDIV = args.SUBDIV
+	THREADS = args.THREADS
+	WINDOW_SIZE = args.WINDOW_SIZE
+	WINDOW_OVERLAP = args.WINDOW_OVERLAP
 	UBUNTU = args.UBUNTU
 
 	## PD EXECUTABLE
@@ -193,7 +202,7 @@ if __name__ == '__main__':
 	## RECORD MANY AUDIO FILES
 	# multi-thread execution subdiv by subdiv
 	pd_record_script_path = f'./{synth_name}/record.pd'
-	subdiv = 5 # num threads
+	subdiv = THREADS # num threads
 	for i in range(int(len(command_strings) / subdiv)):
 		processes = [Popen(pd_executable + f' -send "; synth_params {command_strings[i*subdiv + j]}; filename {audio_filenames[i*subdiv + j]}; " -nogui ' + pd_record_script_path, shell=True) for j in range(subdiv)]
 		# collect statuses
@@ -210,7 +219,7 @@ if __name__ == '__main__':
 	## ANALYSE AUDIO FILES WITH FLUCOMA
 	# multi-thread execution subdiv by subdiv
 	pd_analysis_script_path = f'./analysis.pd'
-	subdiv = 5 # num threads
+	subdiv = THREADS # num threads
 	for i in range(int(len(audio_filenames) / subdiv)):
 		processes = [Popen(pd_executable + f' -send "; filename {audio_filenames[i*subdiv + j]}; synthname {synth_name}; " -nogui ' + pd_analysis_script_path, shell=True) for j in range(subdiv)]
 		# collect statuses
