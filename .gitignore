@@ -1,0 +1,12 @@
+00_synths/*/audio/
+00_synths/*/features/chroma/
+00_synths/*/features/loudness/
+00_synths/*/features/specshape/
+00_synths/*/features/mfcc/
+00_synths/*/features/sinefeaturefreqs/
+00_synths/*/features/sinefeaturemags/
+01_corpus/*/audio/
+
+*.wav
+*.txt
+.DS_Store
