@@ -132,6 +132,7 @@ if __name__ == '__main__':
 						help='True if the script runs on Ubuntu')
 	args = parser.parse_args(sys.argv[1:])
 
+
 	## ARGUMENTS OF THIS PROGRAM ARE:
 	# synth name: name of the folder where to compute the lookup table
 	# number of parameters: number of parameters of the synth in the folder
