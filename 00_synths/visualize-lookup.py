@@ -131,7 +131,7 @@ if __name__ == '__main__':
 
 	cid = fig.canvas.mpl_connect('button_press_event', onclick)
 	fig.suptitle(f'Visualization of {synth_name} synthesizer with {FEATURES} features')
-	plt.show()
 	plt.savefig(f'./{synth_name}/features/visualization.png')
+	plt.show()
 
 
