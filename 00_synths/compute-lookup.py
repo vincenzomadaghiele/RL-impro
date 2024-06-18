@@ -222,7 +222,7 @@ if __name__ == '__main__':
 	pd_analysis_script_path = f'./analysis.pd'
 	subdiv = THREADS # num threads
 	for i in range(int(len(audio_filenames) / subdiv)):
-		processes = [Popen(pd_executable + f' -send "; filename {audio_filenames[i*subdiv + j]}; synthname {synth_name}; " -nogui ' + pd_analysis_script_path, shell=True) for j in range(subdiv)]
+		processes = [Popen(pd_executable + f' -send "; filename {audio_filenames[i*subdiv + j]}; synthname {synth_name}; fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path, shell=True) for j in range(subdiv)]
 		# collect statuses
 		exitcodes = [p.wait() for p in processes]
 
@@ -230,7 +230,7 @@ if __name__ == '__main__':
 	remaining_indices = len(audio_filenames) - (i*subdiv+(subdiv-1))
 	if remaining_indices > 0:
 		for j in range(remaining_indices):
-			command = pd_executable + f' -send "; filename {audio_filenames[(i*subdiv+(subdiv-1)) + j]}; synthname {synth_name}; " -nogui ' + pd_analysis_script_path
+			command = pd_executable + f' -send "; filename {audio_filenames[(i*subdiv+(subdiv-1)) + j]}; synthname {synth_name};  fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path
 			os.system(command)
 
 

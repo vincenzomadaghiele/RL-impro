@@ -3,6 +3,8 @@
 
 import os
 import shutil
+import sys
+import argparse
 import numpy as np
 import pandas as pd
 from subprocess import Popen # process on multiple threads
@@ -37,10 +39,26 @@ def getFeatureValues(corpus_name, audio_filename, feature_name, num_features):
 
 if __name__ == '__main__':
 
+	# parse arguments
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--CORPUS_NAME', type=str, default='GuitarSet',
+						help='name of the folder containing the corpus')
+	parser.add_argument('--THREADS', type=int, default=5,
+						help='number of parallel threads for computation')
+	parser.add_argument('--WINDOW_SIZE', type=int, default=1024,
+						help='size of FFT window for feature computation')
+	parser.add_argument('--WINDOW_OVERLAP', type=int, default=512,
+						help='overlap of FFT windows for feature computation')
+	parser.add_argument('--UBUNTU', type=bool, default=False,
+						help='True if the script runs on Ubuntu')
+	args = parser.parse_args(sys.argv[1:])
 
-	corpus_name = 'GuitarSet'
-	THREADS = 5
-	UBUNTU = False
+	# args
+	corpus_name = args.CORPUS_NAME
+	THREADS = args.THREADS
+	WINDOW_SIZE = args.WINDOW_SIZE
+	WINDOW_OVERLAP = args.WINDOW_OVERLAP
+	UBUNTU = args.UBUNTU
 
 	## PD EXECUTABLE
 	global pd_executable
@@ -65,6 +83,7 @@ if __name__ == '__main__':
 
 	# make directories for analysis
 	os.mkdir(features_path)
+	os.mkdir(os.path.join(features_path, 'all-files-in-corpus'))
 	for audio_file in audio_filenames:
 		audio_features_path = os.path.join(features_path, audio_file)
 		os.mkdir(audio_features_path)
@@ -78,10 +97,10 @@ if __name__ == '__main__':
 
 	## ANALYSE AUDIO FILES WITH FLUCOMA
 	# multi-thread execution subdiv by subdiv
-	pd_analysis_script_path = f'./corpus-analysis.pd'
+	pd_analysis_script_path = f'./audio-analysis.pd'
 	subdiv = THREADS # num threads
 	for i in range(int(len(audio_filenames) / subdiv)):
-		processes = [Popen(pd_executable + f' -send "; filename {audio_filenames[i*subdiv + j]}; corpusname {corpus_name}; " -nogui ' + pd_analysis_script_path, shell=True) for j in range(subdiv)]
+		processes = [Popen(pd_executable + f' -send "; filename {audio_filenames[i*subdiv + j]}; corpusname {corpus_name};  fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path, shell=True) for j in range(subdiv)]
 		# collect statuses
 		exitcodes = [p.wait() for p in processes]
 
@@ -89,7 +108,7 @@ if __name__ == '__main__':
 	remaining_indices = len(audio_filenames) - (i*subdiv+(subdiv-1))
 	if remaining_indices > 0:
 		for j in range(remaining_indices):
-			command = pd_executable + f' -send "; filename {audio_filenames[(i*subdiv+(subdiv-1)) + j]}; corpusname {corpus_name}; " -nogui ' + pd_analysis_script_path
+			command = pd_executable + f' -send "; filename {audio_filenames[(i*subdiv+(subdiv-1)) + j]}; corpusname {corpus_name}; fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path
 			os.system(command)
 
 
@@ -138,11 +157,6 @@ if __name__ == '__main__':
 		sinefeaturefreqs_features = getFeatureValues(corpus_name, audio_file, 'sinefeaturefreqs', num_sinefeaturefreqs_features)
 		sinefeaturemags_features = getFeatureValues(corpus_name, audio_file, 'sinefeaturemags', num_sinefeaturemags_features)
 
-		print(loudness_features.shape)
-		print(mfcc_features.shape)
-		print(chroma_features.shape)
-		print(specshape_features.shape)
-
 		# compute dataframe
 		print('Saving dataset...')
 		data = np.hstack((loudness_features.T,mfcc_features.T, 
@@ -152,6 +166,7 @@ if __name__ == '__main__':
 		audiofile_df = audiofile_df.sort_index()
 		print(audiofile_df)
 		audiofile_df.to_csv(f'{corpus_name}/features/{audio_file}/{audio_file}.csv')
+		audiofile_df.to_csv(f'{corpus_name}/features/all-files-in-corpus/{audio_file}.csv')
 
 
 

@@ -1,5 +1,8 @@
 ## Instructions
 
+The features are only computed using Flucoma to ensure compatibility between PD and python in a live scenario. 
+
+
 ### Generate lookup table for a custom synth
 1. Create a PD synthesizer with a given number of synthesis parameters. The synthesizer is a pd abstraction called "synth.pd". The abstraction has only one input: a list of synthesis parameters as floating points betwwen 0 and 1. The synthesizer outputs sound according to the given list of parameters.
 2. Save the synth in a folder called './00_synths/{synth name}/synth.pd'. In the same folder, copy the PD scripts "live.pd" and "record.pd".
@@ -8,7 +11,12 @@
 
 ### Generate feature analysis for a custom corpus
 1. Place your collection of audio tracks in the folder '01_corpus/{corpus_name}/audio'. 
-2. Run the code '01_corpus/compute-corpus.py'. This code outputs a csv file for each audio track in the corpus. The csv collects all the features extracted from the audio file. 
+2. Run the code '01_corpus/analyze-corpus.py'. This code outputs a csv file for each audio track in the corpus. The csv collects all the features extracted from the audio file. 
+
+
+### Training the model
+1. Set up the environment parameters by modifying the file 'environment_settings.json'. The field 'features_keep' allows to select which features to use for training among the ones extracted during the analysis phase; these features are used to descibe the state of the agent and the musician at a given point in time. The single name of a feature will select only that feature. Inserting the whole feature category will override single features and select the whole category (for example, selecting 'loudness-dB' will add it to the list of features, but adding 'loudness' will add all the features in that category).
+2. The field 'features_reward' allows to select which features to use for the reward. These features will be used to calculate the similarity metric. The single name of a feature will select only that feature. Inserting the whole feature category will override single features and select the whole category.
 
 
 #### Dependencies
