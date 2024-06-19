@@ -1,4 +1,4 @@
-#N canvas 85 323 498 452 12;
+#N canvas -1661 306 902 628 12;
 #X declare -lib zexy;
 #X obj 93 108 oscparse;
 #X obj 93 134 route list;
@@ -13,8 +13,9 @@
 #X obj 131 327 hsl 162 19 0 1 0 0 empty empty empty -2 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 93 160 route params;
 #X obj 93 239 synth, f 12;
-#X obj 305 132 loadbang;
-#X msg 305 156 \; pd dsp 1;
+#X obj 283 110 loadbang;
+#X msg 283 134 \; pd dsp 1;
+#X obj 393 237 live-analysis;
 #X connect 0 0 1 0;
 #X connect 1 0 11 0;
 #X connect 2 0 6 0;
@@ -25,4 +26,5 @@
 #X connect 10 0 8 1;
 #X connect 11 0 2 0;
 #X connect 12 0 8 0;
+#X connect 12 0 15 0;
 #X connect 13 0 14 0;
