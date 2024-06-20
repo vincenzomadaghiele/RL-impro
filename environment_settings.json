@@ -3,10 +3,13 @@
     "corpus_name": "GuitarSet",
     "N_synth_params": 2,
     "features_keep": [
-        "loudness"
+        "loudness",
+        "mfcc",
+        "specshape"
     ],
     "features_reward": [
-        "loudness-dB"
+        "loudness-dB",
+        "specshape-centroid"
     ],
     "reward_noise": 0.1,
     "training_mode": "mixed_random",
@@ -16,6 +19,6 @@
     "port_send": 6667,
     "port_send_optimal": 6668,
     "verbose": "False",
-    "live": "True",
+    "live": "False",
     "max_episode_duration": 3000
 }
