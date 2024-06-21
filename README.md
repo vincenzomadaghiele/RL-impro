@@ -1,3 +1,13 @@
+# A reinforcement learning agent for live sound improvisation
+
+This is the official repository of the RL improvisation project.
+
+It contains all the code for the paper):
+
+> Vincenzo Madaghiele, Stefano Fasciani.
+> [**A listening agent for live control of synthesis parameters using reinforcement learning**]().
+> In _Proceedings of AI and Music Creativity Conference (AIMC) 2024_, 9-11 September 2024, Oxford (UK).
+
 ## Instructions
 
 The features are only computed using Flucoma to ensure compatibility between PD and python in a live scenario. 
