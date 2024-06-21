@@ -1,5 +1,5 @@
 {
-    "num_iterations": 3000,
+    "num_iterations": 30000,
     "initial_collect_steps": 1000,
     "collect_steps_per_iteration": 1,
     "replay_buffer_capacity": 100000,
@@ -13,5 +13,5 @@
     "max_q_value": 20,
     "n_step_update": 2,
     "num_eval_episodes": 10,
-    "eval_interval": 100
+    "eval_interval": 1000
 }

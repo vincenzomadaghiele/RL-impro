@@ -1,4 +1,10 @@
-## define CONSTANTS (move to global constants.py script)
+## define CONSTANTS 
+
+## PD EXECUTABLES
+macos_pd_executable = '/Applications/Pd-0.54-1.app/Contents/Resources/bin/pd' # on mac
+ubuntu_pd_executable = '/usr/bin/pd' # on linux
+
+
 
 # number of features for each type
 global num_loudness_features
@@ -37,3 +43,27 @@ specshape_feature_names = ['specshape-centroid', 'specshape-spread',
 sinefeaturefreqs_feature_names = [f'sinefeaturefreqs-{i}' for i in range(num_sinefeaturefreqs_features)]
 sinefeaturemags_feature_names = [f'sinefeaturemags-{i}' for i in range(num_sinefeaturemags_features)]
 feature_names = loudness_feature_names + mfcc_feature_names + chroma_feature_names + specshape_feature_names + sinefeaturefreqs_feature_names + sinefeaturemags_feature_names
+
+
+def abbreviations2feats(features_list):
+    features = []
+    for feat in features_list:
+        if feat == 'loudness':
+            features += loudness_feature_names
+        elif feat == 'mfcc':
+            features += mfcc_feature_names
+        elif feat == 'chroma':
+            features += chroma_feature_names
+        elif feat == 'specshape':
+            features += specshape_feature_names
+        elif feat == 'sinefeaturefreqs':
+            features += sinefeaturefreqs_feature_names
+        elif feat == 'sinefeaturemags':
+            features += sinefeaturemags_feature_names
+        elif feat == 'all':
+            features += feature_names
+        else:
+            features.append(feat)
+    
+    features = [feat for feat in feature_names if feat in features]
+    return features

@@ -54,9 +54,11 @@ class DiscreteSynthMatchingEnv(py_environment.PyEnvironment):
         print('Initialized synth environment')
         print('-'*40)
         print('Synthesizer used:')
+        self.synth_name = synth_name
         print(synth_name)
         print()
         print('Target corpus data:')
+        self.corpus_name = corpus_name
         print(corpus_name)
         print()
         print('State features:')
@@ -69,57 +71,18 @@ class DiscreteSynthMatchingEnv(py_environment.PyEnvironment):
         # user-defined parameters
         self.N_synth_params = N_synth_params # number of parameters of the synthesizer
         
-        # features to use for state 
-        features = []
-        for feat in features_keep:
-            if feat == 'loudness':
-                features += constants.loudness_feature_names
-            elif feat == 'mfcc':
-                features += constants.mfcc_feature_names
-            elif feat == 'chroma':
-                features += constants.chroma_feature_names
-            elif feat == 'specshape':
-                features += constants.specshape_feature_names
-            elif feat == 'sinefeaturefreqs':
-                features += constants.sinefeaturefreqs_feature_names
-            elif feat == 'sinefeaturemags':
-                features += constants.sinefeaturemags_feature_names
-            elif feat == 'all':
-                features += constants.feature_names
-            else:
-                features.append(feat)
-        
+        ## FEATURES TO USE TO DESCRIBE STATE
+        features = constants.abbreviations2feats(features_keep)        
         features = [feat for feat in constants.feature_names if feat in features]
         self.features_keep = features # features to use for training
         self.N_features = len(self.features_keep) # number of features used for training
         #print(self.features_keep)
 
-
-        # features to use for state 
-        features_rew = []
-        for feat in features_reward:
-            if feat == 'loudness':
-                features_rew += constants.loudness_feature_names
-            elif feat == 'mfcc':
-                features_rew += constants.mfcc_feature_names
-            elif feat == 'chroma':
-                features_rew += constants.chroma_feature_names
-            elif feat == 'specshape':
-                features_rew += constants.specshape_feature_names
-            elif feat == 'sinefeaturefreqs':
-                features_rew += constants.sinefeaturefreqs_feature_names
-            elif feat == 'sinefeaturemags':
-                features_rew += constants.sinefeaturemags_feature_names
-            elif feat == 'all':
-                features += constants.feature_names
-            else:
-                features_rew.append(feat)
-        
-        # compute reward weights based on user settings
-        features_rew = [feat for feat in constants.feature_names if feat in features_rew]
+        ## FEATURES TO USE TO COMPUTE REWARD
+        self.features_rew = constants.abbreviations2feats(features_reward) 
         reward_weights = []
         for feat in self.features_keep:
-            if feat in features_rew:
+            if feat in self.features_rew:
                 reward_weights.append(1)
             else:
                 reward_weights.append(0)
@@ -452,8 +415,11 @@ class DiscreteSynthMatchingEnv(py_environment.PyEnvironment):
     def getParams(self):
         
         params_dict = {}
+        params_dict['synth_name'] = self.synth_name
+        params_dict['corpus_name'] = self.corpus_name
         params_dict['N_synth_params'] = self.N_synth_params
         params_dict['features_keep'] = self.features_keep
+        params_dict['features_reward'] = self.features_rew
         params_dict['N_features'] = self.N_features
         params_dict['lookup_table_path'] = self.lookup_table_path
         params_dict['N_possible_actions'] = self.N_possible_actions
