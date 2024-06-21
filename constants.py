@@ -1,9 +1,9 @@
-## define CONSTANTS 
+## CONSTANTS
 
-## PD EXECUTABLES
+
+# PD executables
 macos_pd_executable = '/Applications/Pd-0.54-1.app/Contents/Resources/bin/pd' # on mac
 ubuntu_pd_executable = '/usr/bin/pd' # on linux
-
 
 
 # number of features for each type

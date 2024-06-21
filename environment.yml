@@ -1,5 +1,6 @@
-name: RL-env
+name: RLenv
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - alabaster=0.7.12=pyhd3eb1b0_0
@@ -19,19 +20,24 @@ dependencies:
   - beautifulsoup4=4.12.2=py311hca03da5_0
   - binaryornot=0.4.4=pyhd3eb1b0_1
   - black=23.11.0=py311hca03da5_0
+  - blas=1.0=openblas
   - bleach=4.1.0=pyhd3eb1b0_0
+  - brotli=1.1.0=hb547adb_1
+  - brotli-bin=1.1.0=hb547adb_1
   - brotli-python=1.0.9=py311h313beb8_7
   - bzip2=1.0.8=h620ffc9_4
-  - ca-certificates=2023.12.12=hca03da5_0
-  - certifi=2024.2.2=py311hca03da5_0
+  - ca-certificates=2024.6.2=hf0a4a13_0
+  - certifi=2024.6.2=pyhd8ed1ab_0
   - cffi=1.16.0=py311h80987f9_0
   - chardet=4.0.0=py311hca03da5_1003
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
   - click=8.1.7=py311hca03da5_0
   - cloudpickle=2.2.1=py311hca03da5_0
   - colorama=0.4.6=py311hca03da5_0
-  - comm=0.1.2=py311hca03da5_0
+  - comm=0.2.2=pyhd8ed1ab_0
+  - contourpy=1.2.0=py311h48ca7d4_0
   - cookiecutter=2.5.0=py311hca03da5_0
+  - cycler=0.12.1=pyhd8ed1ab_0
   - cyrus-sasl=2.1.28=h9131b1a_1
   - debugpy=1.6.7=py311h313beb8_0
   - decorator=5.1.1=pyhd3eb1b0_0
@@ -42,6 +48,7 @@ dependencies:
   - docutils=0.18.1=py311hca03da5_3
   - executing=0.8.3=pyhd3eb1b0_0
   - flake8=6.0.0=py311hca03da5_0
+  - freetype=2.10.4=h17b34a0_1
   - gettext=0.21.0=h13f89a0_1
   - glib=2.78.4=h313beb8_0
   - glib-tools=2.78.4=h313beb8_0
@@ -75,30 +82,44 @@ dependencies:
   - jupyterlab=4.0.11=py311hca03da5_0
   - jupyterlab_pygments=0.1.2=py_0
   - jupyterlab_server=2.25.1=py311hca03da5_0
+  - jupyterlab_widgets=3.0.11=pyhd8ed1ab_0
   - keyring=23.13.1=py311hca03da5_0
   - krb5=1.20.1=hf3e1bf2_1
   - lazy-object-proxy=1.6.0=py311h80987f9_0
+  - lcms2=2.12=hba8e193_0
+  - lerc=3.0=hc377ac9_0
+  - libbrotlicommon=1.1.0=hb547adb_1
+  - libbrotlidec=1.1.0=hb547adb_1
+  - libbrotlienc=1.1.0=hb547adb_1
   - libclang13=14.0.6=default_h24352ff_1
   - libcxx=14.0.6=h848a8c0_0
+  - libdeflate=1.17=h80987f9_1
   - libedit=3.1.20230828=h80987f9_0
   - libffi=3.4.4=hca03da5_0
+  - libgfortran=5.0.0=13_2_0_hd922786_3
+  - libgfortran5=13.2.0=hf226fd6_3
   - libglib=2.78.4=h0a96307_0
   - libiconv=1.16=h1a28f6b_2
   - libllvm14=14.0.6=h7ec7a93_3
+  - libopenblas=0.3.23=openmp_hc731615_0
   - libpng=1.6.39=h80987f9_0
   - libpq=12.17=h02f6b3c_0
   - libsodium=1.0.18=h1a28f6b_0
   - libspatialindex=1.9.3=hc377ac9_0
+  - libtiff=4.5.1=h313beb8_0
+  - libwebp-base=1.4.0=h93a5062_0
   - libxml2=2.10.4=h0dcf63f_1
   - llvm-openmp=14.0.6=hc6e5704_0
   - lz4-c=1.9.4=h313beb8_0
   - markdown-it-py=2.2.0=py311hca03da5_1
   - markupsafe=2.1.3=py311h80987f9_0
+  - matplotlib-base=3.8.4=py311h7aedaa7_0
   - matplotlib-inline=0.1.6=py311hca03da5_0
   - mccabe=0.7.0=pyhd3eb1b0_0
   - mdurl=0.1.0=py311hca03da5_0
   - mistune=2.0.4=py311hca03da5_0
   - more-itertools=10.1.0=py311hca03da5_0
+  - munkres=1.1.4=pyh9f0ad1d_0
   - mypy_extensions=1.0.0=py311hca03da5_0
   - mysql=5.7.24=ha71a6ea_2
   - nbclient=0.8.0=py311hca03da5_0
@@ -107,8 +128,11 @@ dependencies:
   - ncurses=6.4=h313beb8_0
   - nest-asyncio=1.6.0=py311hca03da5_0
   - notebook-shim=0.2.3=py311hca03da5_0
+  - numpy=1.26.4=py311he598dae_0
+  - numpy-base=1.26.4=py311hfbfe69c_0
   - numpydoc=1.5.0=py311hca03da5_0
-  - openssl=3.0.13=h1a28f6b_0
+  - openjpeg=2.3.0=h7a6adac_2
+  - openssl=3.3.1=hfb2fe0b_0
   - overrides=7.4.0=py311hca03da5_0
   - packaging=23.1=py311hca03da5_0
   - pandocfilters=1.5.0=pyhd3eb1b0_0
@@ -201,6 +225,7 @@ dependencies:
   - tomlkit=0.11.1=py311hca03da5_0
   - tornado=6.3.3=py311h80987f9_0
   - traitlets=5.7.1=py311hca03da5_0
+  - typing_extensions=4.9.0=py311hca03da5_1
   - ujson=5.4.0=py311h313beb8_0
   - unidecode=1.2.0=pyhd3eb1b0_0
   - urllib3=2.1.0=py311hca03da5_1
@@ -227,11 +252,10 @@ dependencies:
       - aiosignal==1.3.1
       - annotated-types==0.6.0
       - astunparse==1.6.3
+      - audioread==3.0.1
       - blessed==1.20.0
       - cachetools==5.3.2
       - colorful==0.5.6
-      - contourpy==1.2.0
-      - cycler==0.12.1
       - distlib==0.3.8
       - dm-tree==0.1.8
       - farama-notifications==0.0.4
@@ -257,12 +281,17 @@ dependencies:
       - h5py==3.10.0
       - httptools==0.6.1
       - imageio==2.4.0
+      - ipympl==0.9.3
+      - ipywidgets==8.1.2
       - joblib==1.3.2
+      - jupyterlab-widgets==3.0.10
       - keras==2.15.0
       - keras-rl2==1.0.5
       - kiwisolver==1.4.5
       - lazy-loader==0.3
       - libclang==16.0.6
+      - librosa==0.10.1
+      - llvmlite==0.42.0
       - markdown==3.5.2
       - matplotlib==3.8.3
       - ml-dtypes==0.2.0
@@ -270,7 +299,7 @@ dependencies:
       - msgpack==1.0.7
       - multidict==6.0.5
       - networkx==3.2.1
-      - numpy==1.26.4
+      - numba==0.59.1
       - nvidia-ml-py==12.535.133
       - oauthlib==3.2.2
       - opencensus==0.11.4
@@ -278,6 +307,7 @@ dependencies:
       - opt-einsum==3.3.0
       - pandas==2.2.0
       - pillow==10.2.0
+      - pooch==1.8.1
       - protobuf==4.25.3
       - py-spy==0.3.14
       - pyarrow==15.0.0
@@ -298,6 +328,8 @@ dependencies:
       - scikit-learn==1.4.1.post1
       - scipy==1.12.0
       - smart-open==6.4.0
+      - soundfile==0.12.1
+      - soxr==0.3.7
       - starlette==0.32.0.post1
       - sympy==1.12
       - tensorboard==2.15.2
@@ -307,6 +339,7 @@ dependencies:
       - tensorflow-estimator==2.15.0
       - tensorflow-io-gcs-filesystem==0.36.0
       - tensorflow-macos==2.15.0
+      - tensorflow-metal==1.1.0
       - tensorflow-probability==0.23.0
       - termcolor==2.4.0
       - tf-agents==0.19.0
@@ -324,5 +357,6 @@ dependencies:
       - watchfiles==0.21.0
       - websockets==12.0
       - werkzeug==3.0.1
+      - widgetsnbextension==4.0.10
       - yarl==1.9.4
 prefix: /Users/vincemad/anaconda3/envs/RLenv
