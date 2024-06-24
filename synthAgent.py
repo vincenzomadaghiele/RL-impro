@@ -24,7 +24,7 @@ class DiscreteSynthAgent:
 	def __init__(self, 
 					synth_name='sin', 
 					N_synth_parameters=2, 
-					features='all',
+					features=['all'],
 					step_size=0.05,
 					ip_send="127.0.0.1", 
 					port_send=6667):
@@ -36,6 +36,12 @@ class DiscreteSynthAgent:
 		self.features = [feat for feat in constants.feature_names if feat in features]
 		self.step_size = step_size
 		self.last_action = ''
+
+		print('Initializing agent')
+		print('Synthesizer name:')
+		print(self.synth_name)
+		print('State features:')
+		print(self.features)
 
 		## INITIALIZE ACTION DICTIONARY BASED ON NUMBER OF PARAMETERS
 		# possible actions are -1, 0 or 1 for each parameter
@@ -81,7 +87,7 @@ class DiscreteSynthAgent:
 		# Initialize synth parameters
 		random.seed(seed)
 		self.synth_parameter_values = [random.uniform(0,1) for _ in range(self.N_synth_parameters)]
-		self.synth_state_features = self._parameters2features(self.synth_parameter_values)
+		self.synth_state_features = self.parameters2features(self.synth_parameter_values)
 
 
 	def perform_action(self, action:int):
@@ -92,7 +98,7 @@ class DiscreteSynthAgent:
 			self.synth_parameter_values[parameter] += synth_param_action.value * self.step_size
 			self.synth_parameter_values[parameter] = np.clip(self.synth_parameter_values[parameter], 0, 1)
 		# update synthesizer state as described by the sound features
-		self.synth_state_features = self._parameters2features(self.synth_parameter_values)
+		self.synth_state_features = self.parameters2features(self.synth_parameter_values)
 
 		#print(f'A_t: {action} --> {synth_param_actions}')
 		#print(f'p_synth: {self.synth_parameter_values} ')
@@ -106,11 +112,17 @@ class DiscreteSynthAgent:
 		self.osc_client.send_message("/agent-params", msg)
 
 
-	def _parameters2features(self, parameters):
+	def parameters2features(self, parameters):
 		# returns the normalized feature vales corresponding to the synthesis parameters
 		closest = abs(parameters - self.lookup_table[self.param_names].values)
 		closest_idx = np.argmin(np.sum((closest), axis=1))
 		return self.normalized_lookup_table[closest_idx, :]
+
+	def features2optimalparamteres(self, normalized_features):
+		# returns the normalized feature vales corresponding to the synthesis parameters
+		closest = abs(normalized_features - self.normalized_lookup_table)
+		closest_idx = np.argmin(np.sum((closest), axis=1))
+		return self.lookup_table.values[closest_idx, :self.N_synth_parameters], self.normalized_lookup_table[closest_idx, :]
 
 
 
