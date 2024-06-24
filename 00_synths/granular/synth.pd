@@ -139,13 +139,13 @@
 #X connect 32 0 54 0;
 #X connect 32 0 29 0;
 #X connect 34 0 56 0;
-#X connect 34 1 13 0;
-#X connect 34 2 72 0;
+#X connect 34 1 15 0;
+#X connect 34 2 22 0;
 #X connect 34 3 37 0;
 #X connect 35 0 34 0;
 #X connect 36 0 55 0;
 #X connect 37 0 38 0;
-#X connect 38 0 69 0;
+#X connect 38 0 17 0;
 #X connect 39 0 24 0;
 #X connect 41 0 12 1;
 #X connect 41 0 25 0;
@@ -159,7 +159,7 @@
 #X connect 52 0 33 0;
 #X connect 53 0 4 0;
 #X connect 54 0 59 0;
-#X connect 55 0 59 0;
+#X connect 55 0 32 0;
 #X connect 56 0 36 0;
 #X connect 57 0 60 0;
 #X connect 58 0 57 0;

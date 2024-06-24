@@ -51,14 +51,14 @@ class DiscreteSynthMatchingEnv(py_environment.PyEnvironment):
         self.N_synth_params = N_synth_params # number of parameters of the synthesizer
         
         ## FEATURES TO USE TO DESCRIBE STATE
-        features = constants.abbreviations2feats(features_keep)        
+        features = constants.abbreviations2feats([features_keep])        
         features = [feat for feat in constants.feature_names if feat in features]
         self.features_keep = features # features to use for training
         self.N_features = len(self.features_keep) # number of features used for training
         #print(self.features_keep)
 
         ## FEATURES TO USE TO COMPUTE REWARD
-        self.features_rew = constants.abbreviations2feats(features_reward) 
+        self.features_rew = constants.abbreviations2feats([features_reward]) 
         reward_weights = []
         for feat in self.features_keep:
             if feat in self.features_rew:
