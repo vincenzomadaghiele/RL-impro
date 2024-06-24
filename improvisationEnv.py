@@ -1,3 +1,5 @@
+## EQUIVALENT ENVIRONMENT CODED IN GYMNASIUM
+
 import os
 import subprocess
 import numpy as np
@@ -29,8 +31,8 @@ class ImprovisationMatchingEnv(gym.Env):
 				features_keep=['all'],
 				features_reward=['all'],
 				synth_name='sin', 
-				corpus_name='GuitarSet',
 				N_synth_parameters=2, 
+				corpus_name='GuitarSet',
 				step_size=0.05,
 				reward_noise=0.1, 
 				training_mode='mixed_random',
@@ -186,8 +188,6 @@ class ImprovisationMatchingEnv(gym.Env):
 		# [normalized_agent_features, normalzied_target_features, synth_parameters]
 		obs = np.concatenate((self.synth_agent.synth_state_features, self.target_features, self.synth_agent.synth_parameter_values))
 
-		print(info)
-
 		# Render environment
 		if(self.render_mode=='human'):
 			self.render()
@@ -229,6 +229,7 @@ class ImprovisationMatchingEnv(gym.Env):
 		info['target_optimal_parameters'] = self.optimal_target_synth_parameters
 		info['reward'] = reward
 		info['RMSE'] = RMSE
+		print(info)
 
 		# update episode step
 		if self.episode_step >= self.episode_duration - 1:
@@ -237,7 +238,6 @@ class ImprovisationMatchingEnv(gym.Env):
 			self.episode_step += 1
 			terminated = False
 
-		print(info)
 		if(self.render_mode=='human'):
 			self.render()
 
@@ -283,7 +283,10 @@ class ImprovisationMatchingEnv(gym.Env):
 # For unit testing
 if __name__=="__main__":
 
-	env = gym.make('improvisation-matching-v0', render_mode='human')
+	env = gym.make('improvisation-matching-v0', 
+					#synth_name='granular', 
+					#N_synth_parameters=4, 
+					render_mode='human')
 	print(env.observation_space)
 
 	# Use this to check our custom environment
