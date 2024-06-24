@@ -1,6 +1,8 @@
 import os
+import subprocess
 import numpy as np
 import pandas as pd
+from pythonosc import udp_client
 
 import gymnasium as gym
 from gymnasium import spaces
@@ -32,7 +34,7 @@ class ImprovisationMatchingEnv(gym.Env):
 				step_size=0.05,
 				reward_noise=0.1, 
 				training_mode='mixed_random',
-				ip_send="127.0.0.1", port_send=6667,
+				ip_send="127.0.0.1", agent_port_send=6667, target_port_send=6668,
 				max_episode_duration=3000,
 				render_mode=None):
 
@@ -54,8 +56,8 @@ class ImprovisationMatchingEnv(gym.Env):
 												N_synth_parameters=N_synth_parameters, 
 												features=features_keep,
 												step_size=step_size,
-												ip_send="127.0.0.1", 
-												port_send=6667)
+												ip_send=ip_send, 
+												port_send=agent_port_send)
 
 
 		# target corpus
@@ -93,7 +95,6 @@ class ImprovisationMatchingEnv(gym.Env):
 		)
 
 		# reward properties
-		## FEATURES TO USE TO COMPUTE REWARD
 		self.features_reward = constants.abbreviations2feats(features_reward) 
 		reward_weights = []
 		for feat in self.features_keep:
@@ -108,6 +109,23 @@ class ImprovisationMatchingEnv(gym.Env):
 		self.reward_weights = np.array(reward_weights)
 		self.max_reward = np.sum(self.reward_weights)
 
+
+		# define osc client to PD
+		self.ip_send = ip_send # localhost
+		self.agent_osc_client = udp_client.SimpleUDPClient(self.ip_send, agent_port_send)
+		self.target_osc_client = udp_client.SimpleUDPClient(self.ip_send, target_port_send)
+
+		# load live PD interface for rendering
+		if(self.render_mode=='human'):
+			synth_path = f'./00_synths/{self.synth_name}/live.pd'
+			UBUNTU = False
+			## OPEN PD LIVE INTERFACE
+			if not UBUNTU:
+				pd_executable = constants.macos_pd_executable
+			else:
+				pd_executable = constants.ubuntu_pd_executable
+			command = pd_executable + ' ' + synth_path
+			subprocess.Popen(command, shell=True)
 
 
 
@@ -179,10 +197,6 @@ class ImprovisationMatchingEnv(gym.Env):
 
 
 	def step(self, action):
-		info = {}
-		info['action'] = action
-		info['episode_step'] = self.episode_step
-
 		# update synthesis paramteres
 		self.synth_agent.perform_action(action)
 
@@ -201,16 +215,22 @@ class ImprovisationMatchingEnv(gym.Env):
 
 		# update observed state
 		obs = np.concatenate((self.synth_agent.synth_state_features, self.target_features, self.synth_agent.synth_parameter_values))
-		info['synth_features'] = self.synth_agent.synth_state_features
-		info['target_features'] = self.target_features
-		info['synth_parameteres'] = self.synth_agent.synth_parameter_values
-		info['target_optimal_parameters'] = self.optimal_target_synth_parameters
 
 		# calculate reward
 		reward, RMSE = self.weightedSimilarityReward(self.target_features, self.synth_agent.synth_state_features)
 
-		# update episode step
+		info = {}
+		info['episode_step'] = self.episode_step
+		info['action'] = action
+		info['action_commands'] = self.synth_agent.actions_dict[action]
+		info['synth_features'] = self.synth_agent.synth_state_features
+		info['target_features'] = self.target_features
+		info['synth_parameteres'] = self.synth_agent.synth_parameter_values
+		info['target_optimal_parameters'] = self.optimal_target_synth_parameters
+		info['reward'] = reward
+		info['RMSE'] = RMSE
 
+		# update episode step
 		if self.episode_step >= self.episode_duration - 1:
 			terminated = True
 		else:
@@ -218,12 +238,20 @@ class ImprovisationMatchingEnv(gym.Env):
 			terminated = False
 
 		print(info)
+		if(self.render_mode=='human'):
+			self.render()
 
 		return obs, reward, terminated, False, info
 
 
 	def render(self):
-		self.synth_agent.render()
+		synthparams = [str(n) for n in self.synth_agent.synth_parameter_values]
+		msg = ' '.join(synthparams)
+		self.agent_osc_client.send_message("/agent-params", msg)
+
+		synthparams = [str(n) for n in self.optimal_target_synth_parameters]
+		msg = ' '.join(synthparams)
+		self.target_osc_client.send_message("/target-params", msg)
 
 
 	def weightedSimilarityReward(self, target_state, agent_state, reward_type='cubic'):
@@ -252,9 +280,6 @@ class ImprovisationMatchingEnv(gym.Env):
 
 
 
-
-
-
 # For unit testing
 if __name__=="__main__":
 
@@ -276,4 +301,6 @@ if __name__=="__main__":
 
 	    if(terminated):
 	        obs = env.reset()[0]
+
+
 
