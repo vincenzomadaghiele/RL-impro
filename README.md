@@ -1,8 +1,7 @@
 # A reinforcement learning agent for live sound improvisation
 
 This is the official repository of the RL improvisation project.
-
-It contains all the code for the paper):
+It contains all the code for the paper:
 
 > Vincenzo Madaghiele, Stefano Fasciani.
 > [**A listening agent for live control of synthesis parameters using reinforcement learning**]().
