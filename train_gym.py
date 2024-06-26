@@ -6,7 +6,7 @@ import json
 import argparse
 import sys
 import pickle
-from stable_baselines3 import A2C
+from stable_baselines3 import A2C, PPO, DQN
 from stable_baselines3 import PPO
 from stable_baselines3.common.evaluation import evaluate_policy
 import os
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 	parser.add_argument('--ENVIRONMENT_SETTINGS', type=str, default='environment_settings.json',
 						help='path to the json file containing environment settings')
 	parser.add_argument('--AGENT_TYPE', type=str, default='PPO',
-						help='stable baselines3 model type: PPO or A2C')
+						help='stable baselines3 model type: PPO, DQN or A2C')
 	parser.add_argument('--TIMESTEPS', type=int, default=50000,
 						help='number of timesteps for a training session')
 	parser.add_argument('--ITERATIONS', type=int, default=100,
@@ -66,16 +66,16 @@ if __name__ == '__main__':
 	else:
 		render_mode = None
 
-	model_dir = f"./00_synths/{synth_name}/gym_models/models/{AGENT_TYPE}-{int(time.time())}"
-	log_dir = f"./00_synths/{synth_name}/gym_models/logs/{AGENT_TYPE}-{int(time.time())}"
+	agent_name = f'{AGENT_TYPE}-{int(time.time())}'
+	model_dir = f"./00_synths/{synth_name}/gym_models/models/{agent_name}"
+	log_dir = f"./00_synths/{synth_name}/gym_models/logs/{agent_name}"
 	settings_dir = f"./00_synths/{synth_name}/gym_models/settings"
 	os.makedirs(model_dir, exist_ok=True)
 	os.makedirs(log_dir, exist_ok=True)
 	os.makedirs(settings_dir, exist_ok=True)
 
-	json_filename = f'{AGENT_TYPE}-{int(time.time())}-environment.json'
-	with open(os.path.join(settings_dir,json_filename), 'w', encoding='utf-8') as f:
-		json.dump(data, f, ensure_ascii=False, indent=4)
+	with open(os.path.join(settings_dir, f'{agent_name}-environment.json'), 'w', encoding='utf-8') as f:
+		json.dump(environment_settings, f, ensure_ascii=False, indent=4)
 
 	env = gym.make('improvisation-matching-v0', 
 					features_keep=features_keep,
@@ -94,11 +94,13 @@ if __name__ == '__main__':
 
 	if AGENT_TYPE == 'A2C':
 		model = A2C('MlpPolicy', env, verbose=1, device='cuda', tensorboard_log=log_dir)
+	elif AGENT_TYPE == 'DQN':
+		model = DQN('MlpPolicy', env, verbose=1, device='cuda', tensorboard_log=log_dir)
 	else:
 		model = PPO('MlpPolicy', env, verbose=1, device='cuda', tensorboard_log=log_dir)
 
 	for i in range(ITERATIONS):
 		model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name=AGENT_TYPE) # train
-		model.save(f"{model_dir}/a2c_{TIMESTEPS*i}")
+		model.save(f"{model_dir}/{AGENT_TYPE}_{TIMESTEPS*i}")
 
 
