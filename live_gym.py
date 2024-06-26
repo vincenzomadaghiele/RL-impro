@@ -1,6 +1,8 @@
 import constants
 import os
 import pickle
+import argparse
+import sys
 import json
 import subprocess
 import numpy as np
@@ -95,9 +97,9 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--SYNTH_NAME', type=str, default='sin',
 						help='name of the folder containing the synth to be used')
-	parser.add_argument('--MODEL_NAME', type=str, default='PPO-1719407753',
+	parser.add_argument('--MODEL_NAME', type=str, default='DQN-1719412489',
 						help='stable baselines3 model type: PPO, DQN or A2C with corresponding training timestamp')
-	parser.add_argument('--MODEL_ITERATION', type=str, default="a2c_3000000",
+	parser.add_argument('--MODEL_ITERATION', type=str, default="DQN_2000000",
 						help='training iteration of the model to select')
 	parser.add_argument('--IP', type=str, default="127.0.0.1",
 						help='IP address where to send and receive the data')
@@ -118,7 +120,7 @@ if __name__ == '__main__':
 	port_rcv = args.PORT_RECEIVE # receive port from PD
 	UBUNTU = args.UBUNTU
 	AGENT_TYPE = model_name.split('-')[0]
-	
+
 
 	## OPEN PD LIVE INTERFACE
 	if not UBUNTU:

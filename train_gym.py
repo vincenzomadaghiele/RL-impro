@@ -28,6 +28,8 @@ if __name__ == '__main__':
 						help='number of timesteps for a training session')
 	parser.add_argument('--ITERATIONS', type=int, default=100,
 						help='number of timesteps for a training session')
+	parser.add_argument('--N_EVAL_EPISODES', type=int, default=5,
+						help='number of timesteps for a training session')
 	parser.add_argument('--UBUNTU', type=bool, default=False,
 						help='True if the script runs on Ubuntu')
 	args = parser.parse_args(sys.argv[1:])
@@ -36,6 +38,7 @@ if __name__ == '__main__':
 	AGENT_TYPE = args.AGENT_TYPE
 	TIMESTEPS = args.TIMESTEPS
 	ITERATIONS = args.ITERATIONS
+	N_EVAL_EPISODES = args.N_EVAL_EPISODES
 	UBUNTU = args.UBUNTU
 
 	# LOAD ENV SETTINGS
@@ -99,8 +102,15 @@ if __name__ == '__main__':
 	else:
 		model = PPO('MlpPolicy', env, verbose=1, device='cuda', tensorboard_log=log_dir)
 
+	eval_interval = 5 # evaluate every iterations
+	best_model_rew = -np.inf
 	for i in range(ITERATIONS):
 		model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name=AGENT_TYPE) # train
 		model.save(f"{model_dir}/{AGENT_TYPE}_{TIMESTEPS*i}")
-
+		if ITERATIONS % eval_interval:
+			mean_rew, std_rew = stable_baselines3.common.evaluation.evaluate_policy(model, env, n_eval_episodes=N_EVAL_EPISODES)
+			print(mean_rew, std_rew)
+			if mean_rew > best_model_rew:
+				best_model_rew = mean_rew
+				model.save(f"{model_dir}/{AGENT_TYPE}_best")
 
