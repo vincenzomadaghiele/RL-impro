@@ -22,12 +22,12 @@ class SynthParamAction(Enum):
 class DiscreteSynthAgent:
 
 	def __init__(self, 
-					synth_name='sin', 
-					N_synth_parameters=2, 
-					features=['all'],
-					step_size=0.05,
-					ip_send="127.0.0.1", 
-					port_send=6667):
+				synth_name='sin', 
+				N_synth_parameters=2, 
+				features=['all'],
+				step_size=0.05,
+				ip_send="127.0.0.1", 
+				port_send=6667):
 
 		## AGENT PROPERTIES
 		self.synth_name = synth_name

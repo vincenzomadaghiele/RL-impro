@@ -38,12 +38,15 @@ class ImprovisationMatchingEnv(gym.Env):
 				training_mode='mixed_random',
 				ip_send="127.0.0.1", agent_port_send=6667, target_port_send=6668,
 				max_episode_duration=3000,
-				render_mode=None):
+				render_mode=None,
+				seed=None,
+				UBUNTU=False):
 
 		# training parameters
 		self.render_mode = render_mode
 		self.training_mode = training_mode
 		self.max_episode_duration = max_episode_duration
+		self.seed=seed
 
 		# features
 		self.features_keep = constants.abbreviations2feats(features_keep)
@@ -120,7 +123,6 @@ class ImprovisationMatchingEnv(gym.Env):
 		# load live PD interface for rendering
 		if(self.render_mode=='human'):
 			synth_path = f'./00_synths/{self.synth_name}/live.pd'
-			UBUNTU = False
 			## OPEN PD LIVE INTERFACE
 			if not UBUNTU:
 				pd_executable = constants.macos_pd_executable
@@ -133,7 +135,7 @@ class ImprovisationMatchingEnv(gym.Env):
 
 	def reset(self, seed=None, options=None):
 
-		super().reset(seed=seed)
+		super().reset(seed=self.seed)
 		self.synth_agent.reset(seed=seed)
 
 		# Additional info to return.
@@ -169,7 +171,7 @@ class ImprovisationMatchingEnv(gym.Env):
 			# select a random song from the corpus
 			target_song_index = self.np_random.integers(0, len(self.target_songs))
 			self.normalized_target_song = self.normalized_target_songs[target_song_index]
-			self.episode_duration = self.normalized_target_song.shape[1]
+			self.episode_duration = self.normalized_target_song.shape[0]
 			# update target features
 			self.target_features = self.normalized_target_song[self.episode_step]
 			self.optimal_target_synth_parameters, _ = self.synth_agent.features2optimalparamteres(self.target_features)
@@ -229,7 +231,7 @@ class ImprovisationMatchingEnv(gym.Env):
 		info['target_optimal_parameters'] = self.optimal_target_synth_parameters
 		info['reward'] = reward
 		info['RMSE'] = RMSE
-		print(info)
+		#print(info)
 
 		# update episode step
 		if self.episode_step >= self.episode_duration - 1:
