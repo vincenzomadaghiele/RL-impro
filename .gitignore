@@ -6,6 +6,7 @@
 00_synths/*/features/sinefeaturefreqs/
 00_synths/*/features/sinefeaturemags/
 01_corpus/*/audio/
+__pycache__/
 
 *.wav
 *.txt
