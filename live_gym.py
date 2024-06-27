@@ -28,6 +28,7 @@ def process(arrayIn):
 	current_synth_params = np.array(arrayIn[N_tot_features*2:])
 	synth_state = np.array(arrayIn[:N_tot_features])
 	target_state = np.array(arrayIn[N_tot_features:N_tot_features*2])
+	lookup_synth_state = np.array(env.unwrapped.synth_agent.parameters2features(current_synth_params)).reshape(1,-1)
 	#print(current_synth_params, synth_state, target_state)
 
 	# filter array as in dataset
@@ -42,11 +43,11 @@ def process(arrayIn):
 	# scaler
 	scaled_synth_state = env.unwrapped.synth_agent.scaler.transform(synth_state_kept.reshape(1, -1))
 	scaled_target_state = env.unwrapped.synth_agent.scaler.transform(target_state_kept.reshape(1, -1))
-	#print(np.concatenate((scaled_synth_state, scaled_target_state, current_synth_params.reshape(1, -1)), axis=1).shape)
 	observation = np.concatenate((scaled_synth_state, scaled_target_state, current_synth_params.reshape(1, -1)), axis=1).reshape(-1,)
-	#print(observation)
+	lookup_observation = np.concatenate((lookup_synth_state, scaled_target_state, current_synth_params.reshape(1, -1)), axis=1).reshape(-1,)
+	#print(lookup_observation)
 
-	action, _ = model.predict(observation=observation, deterministic=True) # Turn on deterministic, so predict always returns the same behavior
+	action, _ = model.predict(observation=lookup_observation, deterministic=True) # Turn on deterministic, so predict always returns the same behavior
 	synth_param_actions = env.unwrapped.synth_agent.actions_dict[action.tolist()]
 	# Update synthesis paramters
 	for parameter, synth_param_action in enumerate(synth_param_actions):
@@ -173,6 +174,7 @@ if __name__ == '__main__':
 					render_mode=None,
 					seed=seed, 
 					UBUNTU=UBUNTU)
+
 
 	if AGENT_TYPE == 'A2C':
 		model = A2C.load(MODEL_DIR, env=env)
