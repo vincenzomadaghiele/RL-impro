@@ -1,0 +1,24 @@
+{
+    "instrument_name": "FM4",
+    "corpus_name": "GuitarSet",
+    "N_synth_params": 4,
+    "features_keep": [
+        "loudness",
+        "mfcc",
+        "specshape"
+    ],
+    "features_reward": [
+        "mfcc"
+    ],
+    "reward_noise": 0.01,
+    "training_mode": "mixed_random",
+    "reward_type": "cubic+prize",
+    "step_size": 0.05,
+    "ip_send": "127.0.0.1",
+    "port_send": 6667,
+    "port_send_optimal": 6668,
+    "verbose": "False",
+    "live": "False",
+    "max_episode_duration": 6000,
+    "seed" : "None"
+}

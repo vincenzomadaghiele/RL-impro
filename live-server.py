@@ -98,10 +98,10 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--SYNTH_NAME', type=str, default='sin',
 						help='name of the folder containing the synth to be used')
-	parser.add_argument('--MODEL_NAME', type=str, default='DQN-1719412489',
+	parser.add_argument('--MODEL_NAME', type=str, default='1719826201-PPO',
 						help='stable baselines3 model type: PPO, DQN or A2C with corresponding training timestamp')
-	parser.add_argument('--MODEL_ITERATION', type=str, default="DQN_2000000",
-						help='training iteration of the model to select')
+	parser.add_argument('--MODEL_ITERATION', type=str, default="PPO_best",
+						help='training iteration of the model to select eg. PPO_best')
 	parser.add_argument('--IP', type=str, default="127.0.0.1",
 						help='IP address where to send and receive the data')
 	parser.add_argument('--PORT_SEND', type=int, default=6667,
@@ -120,7 +120,7 @@ if __name__ == '__main__':
 	port_snd = args.PORT_SEND # send port to PD
 	port_rcv = args.PORT_RECEIVE # receive port from PD
 	UBUNTU = args.UBUNTU
-	AGENT_TYPE = model_name.split('-')[0]
+	AGENT_TYPE = model_name.split('-')[1]
 
 
 	## OPEN PD LIVE INTERFACE

@@ -3,15 +3,15 @@
     "corpus_name": "GuitarSet",
     "N_synth_params": 2,
     "features_keep": [
-        "loudness-dB",
-        "specshape-centroid"
+        "loudness",
+        "mfcc",
+        "specshape"
     ],
     "features_reward": [
-        "loudness-dB",
-        "specshape-centroid"
+        "mfcc"
     ],
     "reward_noise": 0.01,
-    "training_mode": "static_random",
+    "training_mode": "mixed_random",
     "reward_type": "cubic+prize",
     "step_size": 0.05,
     "ip_send": "127.0.0.1",
