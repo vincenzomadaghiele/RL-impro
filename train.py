@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
 
 	## EVALUATE BEST MODEL
-	model_itaration_for_eval = f'{AGENT_TYPE}_best',
+	model_itaration_for_eval = f'{AGENT_TYPE}_best'
 	model_evaluation = {}
 	print('Evaluating best model')
 	reward_means, RMSE_means, reward_stds, RMSE_stds = evaluate.evaluate(synth_name, agent_name, model_itaration_for_eval,

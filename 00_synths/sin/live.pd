@@ -1,4 +1,4 @@
-#N canvas 0 38 1512 916 12;
+#N canvas -1690 30 1512 1072 12;
 #X declare -lib zexy;
 #X obj 84 93 oscparse;
 #X obj 84 119 route list;

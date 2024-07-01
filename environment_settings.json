@@ -3,12 +3,12 @@
     "corpus_name": "GuitarSet",
     "N_synth_params": 2,
     "features_keep": [
-        "loudness",
-        "mfcc",
-        "specshape"
+        "loudness-dB",
+        "specshape-centroid"
     ],
     "features_reward": [
-        "mfcc"
+        "loudness-dB",
+        "specshape-centroid"
     ],
     "reward_noise": 0.01,
     "training_mode": "mixed_random",

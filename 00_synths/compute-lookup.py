@@ -73,8 +73,8 @@ def computeLookup(synth_name):
 
 
 	## OPEN SYNTH DATA
-	path = f"./{synth_name}/audio"
-	dir_list = os.listdir(path) 
+	audio_path = f"./{synth_name}/audio"
+	dir_list = os.listdir(audio_path) 
 	all_files = ['.'.join(dir.split('.')[:-1]) for dir in dir_list if '.'.join(dir.split('.')[:-1])]
 	print(f'Reading dataset with {len(all_files)} sound files')
 
@@ -109,6 +109,8 @@ def computeLookup(synth_name):
 	print(synth_df)
 	synth_df.to_csv(f'{synth_name}/features/lookup_table.csv')
 
+	# delete audio files
+	shutil.rmtree(audio_path)
 
 
 if __name__ == '__main__':

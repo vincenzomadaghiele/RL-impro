@@ -13,7 +13,7 @@ import constants
 
 def evaluate(synth_name, model_name, model_iteration, 
 			corpus_name=None, training_mode=None,
-			N_EVAL_EPISODES=10, print_interval=100):
+			N_EVAL_EPISODES=10, print_interval=100, UBUNTU=False):
 
 	AGENT_TYPE = model_name.split('-')[1]
 
@@ -136,7 +136,8 @@ if __name__ == '__main__':
 	UBUNTU = args.UBUNTU
 
 	reward_means, RMSE_means, reward_stds, RMSE_stds = evaluate(synth_name, model_name, model_iteration,
-																corpus_name='GuitarSet_test', training_mode='corpus')
+																corpus_name='GuitarSet_test', training_mode='corpus', 
+																UBUNTU=UBUNTU)
 	
 	print()
 	print(f'Reward mean: {np.array(reward_means).mean():.3f}')
