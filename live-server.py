@@ -49,6 +49,7 @@ def process(arrayIn):
 
 	action, _ = model.predict(observation=lookup_observation, deterministic=True) # Turn on deterministic, so predict always returns the same behavior
 	synth_param_actions = env.unwrapped.synth_agent.actions_dict[action.tolist()]
+
 	# Update synthesis paramters
 	for parameter, synth_param_action in enumerate(synth_param_actions):
 		current_synth_params[parameter] += synth_param_action.value * step_size

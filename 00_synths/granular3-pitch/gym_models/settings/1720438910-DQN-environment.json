@@ -1,0 +1,26 @@
+{
+    "instrument_name": "granular3-pitch",
+    "corpus_name": "GuitarSet",
+    "N_synth_params": 3,
+    "features_keep": [
+        "loudness-dB",
+        "specshape",
+        "mfcc",
+        "chroma"
+    ],
+    "features_reward": [
+        "mfcc",
+        "chroma"
+    ],
+    "reward_noise": 0.01,
+    "training_mode": "mixed_random+corpus",
+    "reward_type": "cubic+prize",
+    "step_size": 0.05,
+    "ip_send": "127.0.0.1",
+    "port_send": 6667,
+    "port_send_optimal": 6668,
+    "verbose": "False",
+    "live": "False",
+    "max_episode_duration": 6000,
+    "seed": "None"
+}

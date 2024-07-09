@@ -16,7 +16,7 @@ from stable_baselines3.common.evaluation import evaluate_policy
 import improvisationEnv
 import evaluate
 
-# to visualize: python3 -m tensorboard.main --logdir ./00_synths/sin/gym_models/logs
+# to visualize: python3 -m tensorboard.main --logdir ./00_synths/{synth-name}/gym_models/logs
 
 if __name__ == '__main__':
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 						help='stable baselines3 model type: PPO, DQN or A2C')
 	parser.add_argument('--TIMESTEPS', type=int, default=50000,
 						help='number of timesteps for a training session')
-	parser.add_argument('--ITERATIONS', type=int, default=100,
+	parser.add_argument('--ITERATIONS', type=int, default=40,
 						help='number of timesteps for a training session')
 	parser.add_argument('--N_EVAL_EPISODES', type=int, default=5,
 						help='number of timesteps for a training session')

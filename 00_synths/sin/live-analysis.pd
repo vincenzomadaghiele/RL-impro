@@ -12,7 +12,7 @@
 #X obj 873 332 fluid.sinefeature~ 10;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array \$1-chroma 12 float 3;
-#A 0 0.00193347 0.203554 2.51759 3.18173 0.347526 0.00441533 5.8164e-05 8.38291e-06 3.51335e-06 5.1682e-06 1.58603e-05 8.69698e-05;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 20 12 0 150 40 1 0 0;
 #X restore 197 290 graph;
 #X obj 873 206 fluid.stats -history 50;
@@ -30,12 +30,12 @@
 #X obj 464 165 cnv 19 160 175 empty empty sinefeature 40 12 0 12 #e3c6ff #000000 0;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array \$1-sinefeature.freqs 10 float 3;
-#A 0 866.361 163.091 0 0 0 0 0 0 0 0;
+#A 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 2000 10 0 150 45 1 0 0;
 #X restore 469 212 graph;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array \$1-sinefeature.mags 10 float 3;
-#A 0 0.469389 0.089407 0 0 0 0 0 0 0 0;
+#A 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 1 10 0 150 45 1 0 0;
 #X restore 469 280 graph;
 #X obj 360 165 cnv 19 100 175 empty empty specshape 20 12 0 12 #ffe3c6 #202020 0;
@@ -49,7 +49,7 @@
 #X obj 186 255 cnv 19 170 85 empty empty chroma 60 12 0 12 #c6feff #000000 0;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array \$1-mfcc 13 float 3;
-#A 0 -289.558 155.622 -19.605 -66.3594 -71.8104 -37.2165 3.1543 23.0296 31.1513 21.3417 -10.1461 -11.2701 -27.495;
+#A 0 -1980.04 -7.51435e-14 2.44748e-13 -9.98277e-14 4.23265e-14 -1.14812e-13 1.61098e-13 -4.53178e-14 9.04209e-14 -5.35277e-13 1.14261e-13 -3.12209e-13 -2.84217e-14;
 #X coords 0 1000 13 -1000 150 40 1 0 0;
 #X restore 197 201 graph;
 #X obj 186 165 cnv 19 170 85 empty empty mfcc 60 12 0 12 #ffc7c6 #000000 0;

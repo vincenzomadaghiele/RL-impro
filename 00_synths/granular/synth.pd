@@ -1,7 +1,7 @@
-#N canvas -2059 13 1018 886 12;
+#N canvas -2205 122 1018 886 12;
 #N canvas 0 22 450 278 (subpatch) 0;
-#X array \$1-buffer 1.30926e+06 float 2;
-#X coords 0 1 1.30926e+06 -1 200 50 1 0 0;
+#X array \$1-buffer 110250 float 2;
+#X coords 0 1 110250 -1 200 50 1 0 0;
 #X restore 129 126 graph;
 #X obj 130 198 tgl 25 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 116 560 metro 100;
@@ -103,7 +103,7 @@
 #X obj 612 524 log 2;
 #X obj 612 499 + 1;
 #X msg 821 237 0.5;
-#X msg 710 119 read -resize 00_Jazz3-137-Eb_comp_mic-extract.wav \$1-buffer, f 38;
+#X msg 710 119 read -resize ./extract_medium.wav \$1-buffer;
 #X connect 1 0 2 0;
 #X connect 1 0 63 0;
 #X connect 2 0 9 0;

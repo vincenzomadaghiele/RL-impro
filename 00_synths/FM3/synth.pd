@@ -5,11 +5,11 @@
 #X obj 130 42 inlet;
 #X obj 359 138 *~ 400;
 #X obj 419 137 *~ 5;
-#X obj 453 184 *~ 5;
+#X obj 460 184 *~ 5;
 #X obj 401 172 *~;
 #X obj 374 210 osc~ 40;
 #X obj 395 241 *~;
-#X obj 435 209 *~;
+#X obj 442 209 *~;
 #X obj 359 265 +~;
 #X obj 359 291 osc~;
 #X obj 359 318 outlet~;
@@ -17,7 +17,7 @@
 #X obj 359 111 +~ 1;
 #X msg 359 84 \$1 1.4;
 #X msg 419 84 \$1 1.4;
-#X msg 453 161 \$1 1.4;
+#X msg 460 140 \$1 1.4;
 #X connect 0 0 17 0;
 #X connect 1 0 18 0;
 #X connect 2 0 16 0;

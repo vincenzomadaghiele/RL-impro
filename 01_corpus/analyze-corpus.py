@@ -33,6 +33,7 @@ def getFeatureValues(corpus_name, audio_filename, feature_name, num_features):
 			min_shape = feature.shape[0]
 		features.append(feature)
 	features = [feat[:min_shape] for feat in features]
+	print(np.array(features).shape)
 	return np.array(features)
 
 

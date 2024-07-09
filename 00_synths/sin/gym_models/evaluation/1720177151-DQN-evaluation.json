@@ -1,0 +1,10 @@
+{
+    "train_rew_mean": -12.1742294519739,
+    "train_rew_std": 5.83942261787449,
+    "train_RMSE_mean": -12.1742294519739,
+    "train_RMSE_std": 5.83942261787449,
+    "test_rew_mean": -4.844188901960874,
+    "test_rew_std": 2.9839914656451403,
+    "test_RMSE_mean": -4.844188901960874,
+    "test_RMSE_std": 2.9839914656451403
+}
