@@ -5,14 +5,16 @@
     "features_keep": [
         "loudness-dB",
         "specshape",
-        "mfcc"
+        "mfcc",
+        "chroma"
     ],
     "features_reward": [
         "specshape",
-        "mfcc"
+        "mfcc",
+        "chroma"
     ],
     "reward_noise": 0.01,
-    "training_mode": "mixed_random+corpus",
+    "training_mode": "mixed_random",
     "reward_type": "cubic+prize",
     "step_size": 0.05,
     "ip_send": "127.0.0.1",
