@@ -9,7 +9,7 @@
         "chroma"
     ],
     "features_reward": [
-        "chroma"
+        "mfcc"
     ],
     "reward_noise": 0.01,
     "training_mode": "mixed_random",
@@ -21,5 +21,5 @@
     "verbose": "False",
     "live": "False",
     "max_episode_duration": 6000,
-    "seed" : "None"
+    "seed": "None"
 }
