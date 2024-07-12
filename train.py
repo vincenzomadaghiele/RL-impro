@@ -143,7 +143,7 @@ if __name__ == '__main__':
 	print(f'Training RMSE std: {np.array(RMSE_means).std():.3f}')
 
 	reward_means, RMSE_means, reward_stds, RMSE_stds = evaluate.evaluate(synth_name, agent_name, model_itaration_for_eval,
-																		corpus_name='GuitarSet_test', training_mode='mixed_random')
+																		corpus_name='GuitarSet', training_mode='mixed_random')
 
 
 	model_evaluation["test_rew_mean"] = np.array(reward_means).mean()

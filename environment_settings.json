@@ -9,6 +9,8 @@
         "chroma"
     ],
     "features_reward": [
+        "specshape",
+        "mfcc",
         "chroma"
     ],
     "reward_noise": 0.01,

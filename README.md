@@ -1,6 +1,6 @@
 # A reinforcement learning agent for live sound improvisation
 
-This project develops a musical agent for music improvisation. The model employs reinforcement learning to adaptively control the parameters of a sound synthesizer in response to live audio from a musician. The agent is trained on a corpus of audio files that exemplify the musician’s instrument and stylistic repertoire. During training, the agent listens and learns to imitate the incoming sound according to a set of perceptual descriptors by continuously adjusting the parameters of the synthesizer it controls. To achieve this objective, the agent learns specific strategies that are characteristic of its autonomous behavior in a live interaction.
+This project develops a musical agent for music improvisation. The agent is trained with reinforcement learning to adaptively control the parameters of a sound synthesizer in response to live audio from a musician. The agent is trained on a corpus of audio files that exemplify the musician’s instrument and stylistic repertoire. During training, the agent listens and learns to imitate the incoming sound according to a set of perceptual descriptors by continuously adjusting the parameters of the synthesizer it controls. To achieve this objective, the agent learns specific strategies that are characteristic of its autonomous behavior in a live interaction.
 
 More information about the project is in the paper:
 > Vincenzo Madaghiele, Stefano Fasciani.
