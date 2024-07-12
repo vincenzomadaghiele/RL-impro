@@ -17,7 +17,7 @@ Pure Data (PD) is an open source computer music environment, it can be downloade
 The python dependencies for the project can be installed in a custom conda environment by running the following code in the directory of this repository:
 ```
 conda env create -f environment.yml
-conda activate gymenv
+conda activate RL-impro-env
 ```
 
 ### Playing with pre-trained agents
