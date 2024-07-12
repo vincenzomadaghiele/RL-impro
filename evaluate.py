@@ -108,9 +108,9 @@ def evaluate(synth_name, model_name, model_iteration,
 			step = 0
 			print(f'Evaluating episode {n_episode}')
 			reward_means.append(np.array(cumulative_reward).mean())
-			RMSE_means.append(np.array(cumulative_reward).mean())
+			RMSE_means.append(np.array(cumulative_RMSE).mean())
 			reward_stds.append(np.array(cumulative_reward).std())
-			RMSE_stds.append(np.array(cumulative_reward).std())
+			RMSE_stds.append(np.array(cumulative_RMSE).std())
 
 	return reward_means, RMSE_means, reward_stds, RMSE_stds
 

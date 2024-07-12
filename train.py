@@ -130,7 +130,7 @@ if __name__ == '__main__':
 	model_evaluation = {}
 	print('Evaluating best model')
 	reward_means, RMSE_means, reward_stds, RMSE_stds = evaluate.evaluate(synth_name, agent_name, model_itaration_for_eval,
-																		corpus_name='GuitarSet', training_mode='corpus')
+																		corpus_name='GuitarSet', training_mode='mixed_random')
 
 	model_evaluation["train_rew_mean"] = np.array(reward_means).mean()
 	model_evaluation["train_rew_std"] = np.array(reward_means).std()
@@ -143,7 +143,7 @@ if __name__ == '__main__':
 	print(f'Training RMSE std: {np.array(RMSE_means).std():.3f}')
 
 	reward_means, RMSE_means, reward_stds, RMSE_stds = evaluate.evaluate(synth_name, agent_name, model_itaration_for_eval,
-																		corpus_name='GuitarSet_test', training_mode='corpus')
+																		corpus_name='GuitarSet_test', training_mode='mixed_random')
 
 
 	model_evaluation["test_rew_mean"] = np.array(reward_means).mean()
