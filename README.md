@@ -1,8 +1,6 @@
 # A reinforcement learning agent for live sound improvisation
 
-This is the repository of the RL improvisation project.
-It contains the code for the paper:
-
+More information about the project is in the paper:
 > Vincenzo Madaghiele, Stefano Fasciani.
 > [**A listening agent for live control of synthesis parameters using reinforcement learning**]().
 > In _Proceedings of AI and Music Creativity Conference (AIMC) 2024_, 9-11 September 2024, Oxford (UK).
@@ -62,6 +60,27 @@ python3 analyze-corpus.py --CORPUS_NAME <synth name> --WINDOW_SIZE <fft window s
 ```
 
 ### Training the agent
-1. Set up the environment parameters by modifying the file 'environment_settings.json'. The field 'features_keep' allows to select which features to use for training among the ones extracted during the analysis phase; these features are used to descibe the state of the agent and the musician at a given point in time. The single name of a feature will select only that feature. Inserting the whole feature category will override single features and select the whole category (for example, selecting 'loudness-dB' will add it to the list of features, but adding 'loudness' will add all the features in that category).
-2. The field 'features_reward' allows to select which features to use for the reward. These features will be used to calculate the similarity metric. The single name of a feature will select only that feature. Inserting the whole feature category will override single features and select the whole category.
+To train an agent from scratch using a custom synthesizer, et up the environment parameters by modifying the file `environment_settings.json`. 
+
+The field `features_keep` allows to select which features to use for training among the ones extracted during the analysis phase; these features are used to descibe the state of the agent and the musician at a given point in time. The single name of a feature will select only that feature. Inserting the whole feature category will override single features and select the whole category (for example, selecting `loudness-dB` will add it to the list of features, but selecting `loudness` will add all the features in that category).
+The field `features_reward` allows to select which features to use for the reward. These features will be used to calculate the similarity metric. The single name of a feature will select only that feature. Inserting the whole feature category will override single features and select the whole category.
+```
+python3 train.py
+```
+
+To follow the development of the training using tensorboard you can run the following code in a separate terminal, and then copy `` in your browser search filed. 
+```
+python3 -m tensorboard.main --logdir ./00_synths/<synth name>/gym_models/logs
+```
+
+The trained agents are saved in the directory `./00_synths/<synth name>/gym_models`.
+
+### Playing with the agent
+To play with a trained agent, run the following code, selecting a model from the folder `./00_synths/<synth name>/gym_models/models`:
+```
+python3 live-server.py --SYNTH_NAME <synth name> --MODEL_NAME <model name>
+```
+
+
+
 
