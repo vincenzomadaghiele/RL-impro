@@ -12,7 +12,7 @@ It contains the code for the paper:
 ### Install dependencies
 This project employs python code for machine learning and Pure Data for sound synthesis. 
 
-Pure Data (PD) is an open source computer music environment, it can be downloaded [here](https://puredata.info/downloads). The [Flucoma](https://www.flucoma.org/) library for Pure Data is used for computation of sound descriptor in its PD implementation. Installation instructions for Flucoma with PD can be found [here](https://learn.flucoma.org/installation/pd/). The `zexy` library for PD is used in OSC communication, it can be installed by typing `zexy` in the deken externals manager (`Help -> find externals`) and clicking on `install`.
+Pure Data (PD) is an open source computer music environment, it can be downloaded [here](https://puredata.info/downloads). The [Flucoma](https://www.flucoma.org/) library for Pure Data is used for computation of sound descriptor in its PD implementation. Installation instructions for Flucoma with PD can be found [here](https://learn.flucoma.org/installation/pd/). The `zexy` library for PD is used for OSC communication between python and PD, it can be installed by typing `zexy` in the deken externals manager (`Help -> find externals`) and clicking on `install`.
 
 The python dependencies for the project can be installed in a custom conda environment by running the following code in the directory of this repository:
 ```
@@ -31,12 +31,25 @@ The model name is a combination of a timestamp and the type of RL agent used, fo
 python3 live-server.py --SYNTH_NAME granular --MODEL_NAME 1720616936-DQN
 ```
 
-### Generate lookup table for a custom synth
-1. Create a PD synthesizer with a given number of synthesis parameters. The synthesizer is a pd abstraction called "synth.pd". The abstraction has only one input: a list of synthesis parameters as floating points betwwen 0 and 1. The synthesizer outputs sound according to the given list of parameters.
-2. Save the synth in a folder called './00_synths/{synth name}/synth.pd'. In the same folder, copy the PD scripts "live.pd" and "record.pd".
-3. Run the code "compute-lookup.py" to compute the lookup table of the synth. This code generates and records sound from the pd synth you chose by iterating through its parameters at equal intervals. The recorded sounds are then analysed according to a set of Flucoma descriptors in PD and saved as .txt files in the "features" folder. The .txt are then read and combined in the "lookup_table.csv" file
-4. Run "visualize-lookup.py" to visualize the contents of the lookup table using TSNE, while playing the synth via the interactive map. This script allows to test which features are better at describing the parameter variations. In general, if similar parameter combinations are close to each other in the TSNE plot, the features are good at capturing the synthesizer. 
+## Training models with a custom synthesizer
+It is possible to train the agent on any custom synthesizer coded in Pure Data, using any corpus of sond files representing the musician. 
 
+### Making a custom synth in PD
+Create a PD synthesizer with a given number of synthesis parameters. The synthesizer is a PD abstraction called `synth.pd`. The abstraction has only one input: a list of synthesis parameters as floating points betwwen 0 and 1. The synthesizer outputs sound according to the given list of parameters.
+The file `synth.pd` should be saved in the directory `./00_synths/<synth name>/synth.pd`. `<synth name>` will be the name you  In the same directory, copy the PD scripts `live.pd`, `live-analysis.pd` and `record.pd` from the other synthesizers in `00_synths`.
+
+### Generate lookup table for a custom synth
+The script `00_synths/compute-lookup.py` computes the lookup table of the synth. This code generates and records sound from the PD synth you chose by iterating through its parameters at equal intervals. The recorded sounds are then analysed using the Flucoma descriptors in PD and saved as .txt files in the directory `00_synths/<synth name>/features`. The .txt are then combined in the `00_synths/<synth name>/lookup_table.csv` file. An example of the command to run is:
+```
+cd 00_synths
+python3 compute-lookup.py --SYNTH_NAME <synth name> --N_params <number of synthesis parameters> --SUBDIV <granluarity of the lookup table> --WINDOW_SIZE <fft window size>
+```
+
+The script `00_synths/visualize-lookup.py` generates an interactive 2D representation of the lookup table using PCA or TSNE, allowing to explore the lookup table and listen to how each parameter combination sounds like.
+```
+cd 00_synths
+python3 visualize-lookup.py --SYNTH_NAME <synth name> 
+```
 
 ### Generate feature analysis for a custom corpus
 1. Place your collection of audio tracks in the folder '01_corpus/{corpus_name}/audio'. 
