@@ -85,13 +85,13 @@ python3 live-server.py --SYNTH_NAME <synth name> --MODEL_NAME <model name>
 
 ## Cite
 ```
-@inproceedings{madaghiele2021mingus,
-  author    = {Madaghiele, Vincenzo and Lisena, Pasquale and Troncy, Raphael},
-  title     = {{MINGUS: Melodic Improvisation Neural Generator Using Seq2Seq}},
-  booktitle = {22$^{nd}$ International Society for Music Information Retrieval Conference (ISMIR)},
-  year      = {2021},
-  month     = {11},
-  address   = {Online}
+@inproceedings{madaghiele2024RLimpro,
+  author    = {Madaghiele, Vincenzo and Fasciani, Stefano},
+  title     = {{A listening agent for live control of synthesis parameters using reinforcement learning}},
+  booktitle = {Proceedings of AI and Music Creativity Conference (AIMC)},
+  year      = {2024},
+  month     = {09},
+  address   = {Oxford (UK)}
 }
 ```
 
