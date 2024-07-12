@@ -10,9 +10,15 @@ It contains the code for the paper:
 ## Running the code
 
 ### Install dependencies
-This project employs python code for machine learning and Pure Data for sound synthesis. Pure Data (PD) is an open source computer music environment, it can be downloaded [here](https://puredata.info/downloads). The [Flucoma](https://www.flucoma.org/) library for Pure Data is used for computation of sound descriptor in its PD implementation. Installation instructions for Flucoma with PD can be found [here](https://learn.flucoma.org/installation/pd/). The `zexy` library for PD is used in OSC communication, it can be installed by typing `zexy` in the deken externals manager (`Help -> find externals`) and clicking on `install`.
+This project employs python code for machine learning and Pure Data for sound synthesis. 
 
+Pure Data (PD) is an open source computer music environment, it can be downloaded [here](https://puredata.info/downloads). The [Flucoma](https://www.flucoma.org/) library for Pure Data is used for computation of sound descriptor in its PD implementation. Installation instructions for Flucoma with PD can be found [here](https://learn.flucoma.org/installation/pd/). The `zexy` library for PD is used in OSC communication, it can be installed by typing `zexy` in the deken externals manager (`Help -> find externals`) and clicking on `install`.
 
+The python dependencies for the project can be installed in a custom conda environment by running the following code in the directory of this repository:
+```
+$ conda env create -f environment.yml
+$ conda activate MINGUS
+```
 
 
 ### Generate lookup table for a custom synth
