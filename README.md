@@ -1,5 +1,7 @@
 # A reinforcement learning agent for live sound improvisation
 
+This project develops a musical agent for improvisation. The model employs reinforcement learning to adaptively control the parameters of a sound synthesizer in response to live audio from a musician. The agent is trained on a corpus of audio files that exemplify the musician’s instrument and stylistic repertoire. During training, the agent listens and learns to imitate the incoming sound according to a set of perceptual descriptors by continuously adjusting the parameters of the synthesizer it controls. To achieve this objective, the agent learns specific strategies that are characteristic of its autonomous behavior in a live interaction.
+
 More information about the project is in the paper:
 > Vincenzo Madaghiele, Stefano Fasciani.
 > [**A listening agent for live control of synthesis parameters using reinforcement learning**]().
@@ -81,6 +83,16 @@ To play with a trained agent, run the following code, selecting a model from the
 python3 live-server.py --SYNTH_NAME <synth name> --MODEL_NAME <model name>
 ```
 
-
+## Cite
+```
+@inproceedings{madaghiele2021mingus,
+  author    = {Madaghiele, Vincenzo and Lisena, Pasquale and Troncy, Raphael},
+  title     = {{MINGUS: Melodic Improvisation Neural Generator Using Seq2Seq}},
+  booktitle = {22$^{nd}$ International Society for Music Information Retrieval Conference (ISMIR)},
+  year      = {2021},
+  month     = {11},
+  address   = {Online}
+}
+```
 
 
