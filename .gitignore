@@ -7,9 +7,9 @@
 00_synths/*/features/sinefeaturemags/
 00_synths/*/gym_models/logs/
 00_synths/*/gym_models/models/
-!*/DQN_best.zip
-!*/PPO_best.zip
-!*/A2C_best.zip
+!00_synths/*/gym_models/models/*/DQN_best.zip
+!00_synths/*/gym_models/models/*/PPO_best.zip
+!00_synths/*/gym_models/models/*/A2C_best.zip
 01_corpus/*/audio/
 __pycache__/
 

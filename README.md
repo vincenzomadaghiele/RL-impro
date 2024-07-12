@@ -1,15 +1,18 @@
 # A reinforcement learning agent for live sound improvisation
 
-This is the official repository of the RL improvisation project.
-It contains all the code for the paper:
+This is the repository of the RL improvisation project.
+It contains the code for the paper:
 
 > Vincenzo Madaghiele, Stefano Fasciani.
 > [**A listening agent for live control of synthesis parameters using reinforcement learning**]().
 > In _Proceedings of AI and Music Creativity Conference (AIMC) 2024_, 9-11 September 2024, Oxford (UK).
 
-## Instructions
+## Running the code
 
-The features are only computed using Flucoma to ensure compatibility between PD and python in a live scenario. 
+### Install dependencies
+This project employs python code for machine learning and Pure Data for sound synthesis. Pure Data (PD) is an open source computer music environment, it can be downloaded [here](https://puredata.info/downloads). The [Flucoma](https://www.flucoma.org/) library for Pure Data is used for computation of sound descriptor in its PD implementation. Installation instructions for Flucoma with PD can be found [here](https://learn.flucoma.org/installation/pd/). The `zexy` library for PD is used in OSC communication, it can be installed by typing `zexy` in the deken externals manager (`Help -> find externals`) and clicking on `install`.
+
+
 
 
 ### Generate lookup table for a custom synth
