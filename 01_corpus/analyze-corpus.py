@@ -46,9 +46,9 @@ if __name__ == '__main__':
 						help='name of the folder containing the corpus')
 	parser.add_argument('--THREADS', type=int, default=5,
 						help='number of parallel threads for computation')
-	parser.add_argument('--WINDOW_SIZE', type=int, default=1024,
+	parser.add_argument('--WINDOW_SIZE', type=int, default=256,
 						help='size of FFT window for feature computation')
-	parser.add_argument('--WINDOW_OVERLAP', type=int, default=512,
+	parser.add_argument('--WINDOW_OVERLAP', type=int, default=128,
 						help='overlap of FFT windows for feature computation')
 	parser.add_argument('--UBUNTU', type=bool, default=False,
 						help='True if the script runs on Ubuntu')
