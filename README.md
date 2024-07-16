@@ -14,8 +14,10 @@ This project employs python code for machine learning and Pure Data for sound sy
 
 Pure Data (PD) is an open source computer music environment, it can be downloaded [here](https://puredata.info/downloads). The [Flucoma](https://www.flucoma.org/) library for Pure Data is used for computation of sound descriptor in its PD implementation. Installation instructions for Flucoma with PD can be found [here](https://learn.flucoma.org/installation/pd/). The `zexy` library for PD is used for OSC communication between python and PD, it can be installed by typing `zexy` in the deken externals manager (`Help -> find externals`) and clicking on `install`.
 
-The python dependencies for the project can be installed in a custom conda environment by running the following code in the directory of this repository:
+The python dependencies for the project can be installed in a custom conda environment by running the following code after downloading this repository:
 ```
+git clone https://github.com/vincenzomadaghiele/RL-impro
+cd RL-impro
 conda env create -f environment.yml
 conda activate RL-impro-env
 ```
@@ -33,7 +35,7 @@ python3 live-server.py --SYNTH_NAME granular --MODEL_NAME 1720616936-DQN
 
 
 
-## Training agents with a custom synthesizer
+## Training agents with a custom synthesizer and a custom corpus
 It is possible to train the agent on any custom synthesizer coded in Pure Data, using any corpus of sond files representing the musician. 
 
 ### 1. Making a custom synth in PD
@@ -70,7 +72,7 @@ The field `features_reward` allows to select which features to use for the rewar
 python3 train.py
 ```
 
-To follow the development of the training using tensorboard you can run the following code in a separate terminal, and then copy `` in your browser search filed. 
+To follow the development of the training using tensorboard you can run the following code in a separate terminal, and then copy `http://localhost:6006/` in your browser search filed. 
 ```
 python3 -m tensorboard.main --logdir ./00_synths/<synth-name>/gym_models/logs
 ```
