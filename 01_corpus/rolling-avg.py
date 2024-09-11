@@ -5,7 +5,7 @@ import pandas as pd
 if __name__ == '__main__': 
 	
 	WINDOW = 1000
-	corpus_name = 'GuitarSet_test'
+	corpus_name = 'MAESTRO'
 	songs_list = os.listdir(f'./{corpus_name}/features')
 	songs_list.remove('all-files-in-corpus')
 	os.makedirs(f'./{corpus_name}/features/all-files-in-corpus-rolling-avg', exist_ok=True)

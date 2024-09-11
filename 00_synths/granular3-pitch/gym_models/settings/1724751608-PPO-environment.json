@@ -20,7 +20,7 @@
     "port_send": 6667,
     "port_send_optimal": 6668,
     "verbose": "False",
-    "live": "True",
+    "live": "False",
     "max_episode_duration": 6000,
-    "seed" : "None"
+    "seed": "None"
 }

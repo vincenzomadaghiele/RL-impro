@@ -64,8 +64,8 @@ class ImprovisationMatchingEnv(gym.Env):
 
 
 		# target corpus
-		#self.target_corpus_path = f'./01_corpus/{corpus_name}/features/all-files-in-corpus' # path to target corpus feature csv files folder
-		self.target_corpus_path = f'./01_corpus/{corpus_name}/features/all-files-in-corpus-rolling-avg' # path to target corpus feature csv files folder
+		self.target_corpus_path = f'./01_corpus/{corpus_name}/features/all-files-in-corpus' # path to target corpus feature csv files folder
+		#self.target_corpus_path = f'./01_corpus/{corpus_name}/features/all-files-in-corpus-rolling-avg' # path to target corpus feature csv files folder
 		
 		#self.target_features = np.ones((1,self.N_features))
 		self.target_songs = []

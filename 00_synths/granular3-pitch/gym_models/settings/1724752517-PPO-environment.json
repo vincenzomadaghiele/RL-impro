@@ -22,5 +22,5 @@
     "verbose": "False",
     "live": "True",
     "max_episode_duration": 6000,
-    "seed" : "None"
+    "seed": "None"
 }

@@ -44,7 +44,7 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--CORPUS_NAME', type=str, default='GuitarSet',
 						help='name of the folder containing the corpus')
-	parser.add_argument('--THREADS', type=int, default=5,
+	parser.add_argument('--THREADS', type=int, default=1,
 						help='number of parallel threads for computation')
 	parser.add_argument('--WINDOW_SIZE', type=int, default=256,
 						help='size of FFT window for feature computation')
@@ -73,6 +73,7 @@ if __name__ == '__main__':
 	audio_path = f"./{corpus_name}/audio/"
 	audio_files_list = os.listdir(audio_path)
 	audio_filenames = [audio_file.split('.')[0] for audio_file in audio_files_list]
+	audio_filenames = [i for i in audio_filenames if i]
 
 	## CREATE FOLDERS FOR AUDIO AND FEATURES
 	features_path = f'./{corpus_name}/features'
@@ -100,16 +101,18 @@ if __name__ == '__main__':
 	# multi-thread execution subdiv by subdiv
 	pd_analysis_script_path = f'./audio-analysis.pd'
 	subdiv = THREADS # num threads
+	k = 0
 	for i in range(int(len(audio_filenames) / subdiv)):
 		processes = [Popen(pd_executable + f' -send "; filename {audio_filenames[i*subdiv + j]}; corpusname {corpus_name};  fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path, shell=True) for j in range(subdiv)]
 		# collect statuses
 		exitcodes = [p.wait() for p in processes]
+		k = i
 
 	# remainder single-exectution
-	remaining_indices = len(audio_filenames) - (i*subdiv+(subdiv-1))
+	remaining_indices = len(audio_filenames) - (k*subdiv+(subdiv-1))
 	if remaining_indices > 0:
 		for j in range(remaining_indices):
-			command = pd_executable + f' -send "; filename {audio_filenames[(i*subdiv+(subdiv-1)) + j]}; corpusname {corpus_name}; fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path
+			command = pd_executable + f' -send "; filename {audio_filenames[(k*subdiv+(subdiv-1)) + j]}; corpusname {corpus_name}; fftsize {WINDOW_SIZE}; " -nogui ' + pd_analysis_script_path
 			os.system(command)
 
 
@@ -145,6 +148,7 @@ if __name__ == '__main__':
 	path = f"./{corpus_name}/audio"
 	dir_list = os.listdir(path)
 	all_files = [audio_file.split('.')[0] for audio_file in audio_files_list]
+	all_files = [i for i in all_files if i]
 	print(f'Reading corpus with {len(all_files)} sound files')
 
 	for audio_file in all_files:

@@ -4,7 +4,7 @@ This project develops a musical agent for music improvisation. The agent is trai
 
 More information about the project is in the paper:
 > Vincenzo Madaghiele, Stefano Fasciani.
-> [**A listening agent for live control of synthesis parameters using reinforcement learning**]().
+> [**A listening agent for live control of synthesis parameters using reinforcement learning**](https://aimc2024.pubpub.org/pub/9zd8yyyv/release/1).
 > In _Proceedings of AI and Music Creativity Conference (AIMC) 2024_, 9-11 September 2024, Oxford (UK).
 
 ## Running the code
@@ -60,7 +60,7 @@ Place your collection of audio tracks in the folder `./01_corpus/<corpus name>/a
 The script `./01_corpus/analyze-corpus.py` generates a .csv file for each audio track in the corpus, containing the descriptors resulting from the analysis. 
 ```
 cd 01_corpus
-python3 analyze-corpus.py --CORPUS_NAME <synth-name> --WINDOW_SIZE <fft window size>
+python3 analyze-corpus.py --CORPUS_NAME <corpus-name> --WINDOW_SIZE <fft window size>
 ```
 
 ### 4. Training the agent

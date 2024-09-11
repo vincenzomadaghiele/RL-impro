@@ -1,6 +1,6 @@
-#N canvas -1628 -220 1214 921 12;
+#N canvas -2553 -220 1214 921 12;
 #X declare -lib zexy;
-#X obj 626 56 cnv 19 360 520 empty empty Target 100 35 0 30 #c6feff #000000 0;
+#X obj 626 56 cnv 19 360 520 empty empty Musician 100 35 0 30 #c6feff #000000 0;
 #X obj 65 61 cnv 19 360 520 empty empty Agent 100 35 0 30 #feffc6 #000000 0;
 #X obj 102 161 oscparse;
 #X obj 102 187 route list;
